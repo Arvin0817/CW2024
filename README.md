@@ -48,6 +48,8 @@ Main goals:
 
 5.-The image format in **shieldimage class** should not be jpg
 
+6.- it have **moveHorizontally** class, but the plane can not move left and right.
+
 
 
 ### 5. **How to Run the Project**
