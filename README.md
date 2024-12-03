@@ -31,6 +31,22 @@ Main goals:
 
 
 ### 4. **Known Bugs**:
+1.-Hitting the spacebar multiple times crashes the game.
+  --suspected Reason: memory leak (shells not being deleted in time.)
+
+2.-The game jumps to the second level. boss didnt appears/
+  --suspected Reason: TimeLine update frequency is too high.
+
+3.-Gameover's icon display is too big, not in proportion to the screen.
+  --suspected Reason:///
+
+4.-The game life value calculation is abnormal, even after dodging the cannonballs, the life 
+  value will be deducted.
+  --suspected Reason: the actual range of the cannonballs does not match the proportion of the 
+  cannonball pictures, or the judgement logic is wrong: the algorithm logic is wrong when the 
+  cannonballs fly out of the screen.
+
+5.-The image format in **shieldimage class** should not be jpg
 
 
 
