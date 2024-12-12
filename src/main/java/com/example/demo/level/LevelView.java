@@ -1,8 +1,8 @@
-package com.example.demo;
+package com.example.demo.level;
 
-import com.example.demo.UI.GameOverImage;
-import com.example.demo.UI.HeartDisplay;
-import com.example.demo.UI.WinImage;
+import com.example.demo.view.GameOverImage;
+import com.example.demo.view.HeartDisplay;
+import com.example.demo.view.WinImage;
 import javafx.scene.Group;
 
 public class LevelView {
@@ -11,8 +11,8 @@ public class LevelView {
 	private static final double HEART_DISPLAY_Y_POSITION = 25;
 	private static final int WIN_IMAGE_X_POSITION = 355;
 	private static final int WIN_IMAGE_Y_POSITION = 175;
-	private static final int LOSS_SCREEN_X_POSITION = -160;
-	private static final int LOSS_SCREEN_Y_POSISITION = -375;
+	private static final int LOSS_SCREEN_X_POSITION = 250;
+	private static final int LOSS_SCREEN_Y_POSISITION = 60;
 	private final Group root;
 	private final WinImage winImage;
 	private final GameOverImage gameOverImage;
@@ -39,7 +39,7 @@ public class LevelView {
 	}
 	
 	public void removeHearts(int heartsRemaining) {
-		int currentNumberOfHearts = heartDisplay.getContainer().getChildren().size();
+		int currentNumberOfHearts = heartDisplay.getBlood();
 		for (int i = 0; i < currentNumberOfHearts - heartsRemaining; i++) {
 			heartDisplay.removeHeart();
 		}

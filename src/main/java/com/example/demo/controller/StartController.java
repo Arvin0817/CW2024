@@ -10,7 +10,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
- * Start page logic
+ * 开始页逻辑处理
  */
 public class StartController {
     private final Stage stage;
@@ -22,17 +22,17 @@ public class StartController {
     }
 
     /**
-     * draw start page
+     * 绘制开始页
      */
     public void launch() {
         anchorPane = new AnchorPane();
 
-        //backgroud
+        //背景图
         ImageView background = new ImageView(new Image(getClass().getResource("/com/example/demo/images/background1.jpg").toExternalForm()));
         background.setFitWidth(1300);
         background.setFitHeight(750);
 
-        //game name title
+        //标题
         Label title = new Label("Sky Battle");
         title.setLayoutX(500);
         title.setLayoutY(200);
@@ -40,7 +40,7 @@ public class StartController {
         title.setPrefHeight(100);
         title.setFont(new Font(60));
 
-        //start button details
+        //开始按钮
         Button button = new Button();
         ImageView start = new ImageView(new Image(getClass().getResource("/com/example/demo/images/start.png").toExternalForm()));
         start.setFitWidth(270);

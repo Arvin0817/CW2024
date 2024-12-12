@@ -1,6 +1,6 @@
-package com.example.demo;
+package com.example.demo.level;
 
-import com.example.demo.Actorpackage.Boss;
+import com.example.demo.model.plane.Boss;
 
 public class LevelTwo extends LevelParent {
 
@@ -12,8 +12,6 @@ public class LevelTwo extends LevelParent {
 	public LevelTwo(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
 		boss = new Boss();
-
-
 	}
 
 	@Override
@@ -31,10 +29,14 @@ public class LevelTwo extends LevelParent {
 		}
 	}
 
+	/**
+	 * 添加boss和boss的盾牌
+	 */
 	@Override
 	protected void spawnEnemyUnits() {
 		if (getCurrentNumberOfEnemies() == 0) {
 			addEnemyUnit(boss);
+			getRoot().getChildren().add(boss.getShield());
 		}
 	}
 

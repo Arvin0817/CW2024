@@ -1,17 +1,23 @@
-package com.example.demo;
+package com.example.demo.level;
 
-import java.util.*;
-
-import com.example.demo.Actorpackage.ActiveActorDestructible;
-import com.example.demo.Actorpackage.FighterPlane;
-import com.example.demo.Actorpackage.UserPlane;
-import javafx.animation.*;
+import com.example.demo.utils.GameTools;
+import com.example.demo.model.ActiveActorDestructible;
+import com.example.demo.model.plane.FighterPlane;
+import com.example.demo.model.plane.UserPlane;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.*;
-import javafx.scene.input.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
 
 public abstract class LevelParent extends Observable {
 
@@ -90,6 +96,7 @@ public abstract class LevelParent extends Observable {
 		handleEnemyPenetration();
 		handleUserProjectileCollisions();
 		handleEnemyProjectileCollisions();
+		handleProjectileCollisions();
 		handlePlaneCollisions();
 		removeAllDestroyedActors();
 		updateKillCount();
@@ -149,10 +156,10 @@ public abstract class LevelParent extends Observable {
 	}
 
 	private void removeAllDestroyedActors() {
-		Gmaetools.removeDestroyedActors(friendlyUnits, root);
-		Gmaetools.removeDestroyedActors(enemyUnits, root);
-		Gmaetools.removeDestroyedActors(userProjectiles, root);
-		Gmaetools.removeDestroyedActors(enemyProjectiles, root);
+		GameTools.removeDestroyedActors(friendlyUnits, root);
+		GameTools.removeDestroyedActors(enemyUnits, root);
+		GameTools.removeDestroyedActors(userProjectiles, root);
+		GameTools.removeDestroyedActors(enemyProjectiles, root);
 	}
 
 
@@ -168,11 +175,26 @@ public abstract class LevelParent extends Observable {
 		handleCollisions(enemyProjectiles, friendlyUnits);
 	}
 
+	/**
+	 * 子弹对消
+	 */
+	private void handleProjectileCollisions() {
+		handleCollisions(userProjectiles, enemyProjectiles);
+	}
+
 	private void handleCollisions(List<ActiveActorDestructible> actors1,
 			List<ActiveActorDestructible> actors2) {
 		for (ActiveActorDestructible actor : actors2) {
 			for (ActiveActorDestructible otherActor : actors1) {
 				if (actor.getBoundsInParent().intersects(otherActor.getBoundsInParent())) {
+					System.out.println(actor.getX() + "-" + otherActor.getX());
+					System.out.println(actor.getTranslateX() + "-" + otherActor.getTranslateX());
+					System.out.println(actor.getLayoutX() + "-" + otherActor.getLayoutX());
+					System.out.println("---------------");
+					System.out.println(actor.getY() + "-" + otherActor.getY());
+					System.out.println(actor.getTranslateY() + "-" + otherActor.getTranslateY());
+					System.out.println(actor.getLayoutY() + "-" + otherActor.getLayoutY());
+					System.out.println("**************");
 					actor.takeDamage();
 					otherActor.takeDamage();
 				}

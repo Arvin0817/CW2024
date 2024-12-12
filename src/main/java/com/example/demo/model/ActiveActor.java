@@ -1,4 +1,4 @@
-package com.example.demo.Actorpackage;
+package com.example.demo.model;
 
 import javafx.scene.image.*;
 

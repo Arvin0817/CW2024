@@ -1,4 +1,4 @@
-package com.example.demo.UI;
+package com.example.demo.view;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

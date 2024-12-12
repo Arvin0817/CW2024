@@ -1,6 +1,4 @@
-package com.example.demo.Actorpackage;
-
-import com.example.demo.Destructible;
+package com.example.demo.model;
 
 public abstract class ActiveActorDestructible extends ActiveActor implements Destructible {
 
