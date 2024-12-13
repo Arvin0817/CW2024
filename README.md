@@ -1,6 +1,7 @@
 #1942 Retro shooting plane game by XIA SI ZHE 20476377
 
 Github Link：https://github.com/Arvin0817/CW2024/tree/12.12
+//This is the latest version and the final version of my Coursework
 
 ---
 ### 🚀 **Execution Results**
@@ -317,15 +318,6 @@ These features provide excellent practice opportunities and will be further impr
 
 
 
-
-
-### 5. **How to Run the Project**
-
-
-
-
-
-### 6. **Testing**
 
 
 
