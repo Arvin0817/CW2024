@@ -1,7 +1,11 @@
 #1942 Retro shooting plane game by XIA SI ZHE 20476377
 
-Github Link：
+Github Link：https://github.com/Arvin0817/CW2024/tree/12.12
 
+---
+### 🚀 **Execution Results**
+**✅ All features and fixes have been successfully implemented and are running without any issues.**
+---
 
 Explain：For each feature update, I have set up a different Branch and written a corresponding Readme.md, if you can't understand some of the features and changes, please go to the corresponding Branch to see the detailed Readme.md.
 
@@ -103,6 +107,10 @@ Added ‘Start Game’ button to enhance user interaction. Optimised the scaling
    - Modified the health bar display logic in `HeartDisplay.java` for better visualization.
      - **Related Class**: `HeartDisplay.java`
 
+6.**Added Exception Handling and Static Constants in `Main.java`**
+   - Incorporated `try-catch` blocks to handle exceptions, making it easier to identify and debug issues during development.
+   - Updated the game window's `SCREEN_WIDTH` and `SCREEN_HEIGHT` to static constants, enabling easier adjustments to the game window size in future development.
+
   
   
 
@@ -120,65 +128,194 @@ Added ‘Start Game’ button to enhance user interaction. Optimised the scaling
 4. **Enhance Gameplay Features**
    - Add new levels, increase game difficulty, and introduce various aircraft to enrich the game's content and replayability.
 
+# Sky Battle - December 12th - Version 1.1.0
+
+## **Description**
+This is the final version of the game, featuring new enhancements and bug fixes:
+- Added an additional level between Level One and the Boss level.
+- Introduced enhanced fighter planes, allowing the player to move horizontally.
+- Implemented difficulty selection for varied gameplay.
+- Synchronized health between Level One and Level Two.
+- Added background music and sound effects.
+- Fixed the Boss shield logic and improved its firing patterns.
+- Resolved the issue of players losing health when enemy projectiles leave the screen.
+
+---
+
+## **Already Finished**
+
+### **Bug Fixes**
+1. **Health synchronization after transitioning to the next level**
+   - Addressed an issue where player health did not carry over between levels. Found a problem in `UserPlane.java` during health initialization and in `LevelTwo.java` for not successfully passing the current health.
+   - **Related Classes:** `UserPlane.java`, `LevelTwo.java`
+
+2. **Enemy projectiles deducting health when leaving the screen**
+   - In `LevelParent.java`, enemy projectiles were not checked for `isDestroyed()` after leaving the screen, causing unnecessary health deduction.
+   - In `EnemyProjectile.java`, ensured the `destroy()` method is called for projectiles leaving the screen.
+   - **Related Classes:** `LevelParent.java`, `EnemyProjectile.java`
+
+3. **Boss shield remaining indefinitely**
+   - In `Boss.java`, the constant `MAX_FRAMES_WITH_SHIELD` was set to 500, causing the shield to persist for too long. Adjusted to 100 frames, and ensured `hideShield()` is called when the shield frame count reaches zero.
+   - **Related Classes:** `Boss.java`, `LevelViewLevelTwo.java`
+
+4. **GameOver image size too large**
+   - Fixed the scaling issue in `GameOverImage.java` by modifying the overloaded constructor to set the shield size to 650x650 for proper display.
+   - **Related Classes:** `GameOverImage.java`
+
+---
+
+### **New Features**
+
+1. **Difficulty selection**
+   - Players can now choose the game difficulty upon starting. Defaults to "Simple." Differences:
+     - **Simple Mode:** Spawns a mix of regular and enhanced fighter planes.
+     - **Difficult Mode:** Spawns a larger number of enhanced fighter planes.
+   - Implemented in `LevelOne.java` and `LevelTwo.java` within the `spawnEnemyUnits()` method using `Math.random()` to determine enemy generation.
+   - **Related Classes:** `LevelOne.java`, `LevelTwo.java`
+
+2. **Enhanced fighter planes**
+   - Added a new class `EnhancedEnemyPlane.java` with higher health (5).
+   - **Related Classes:** `EnhancedEnemyPlane.java`
+
+3. **Expanded Boss attack range and firing mechanics**
+   - Added diagonal projectiles by introducing `UpBossProjectile` and `DownBossProjectile` based on `Projectile.java`.
+   - The Boss now fires in three directions for more challenging gameplay.
+   - **Related Classes:** `UpBossProjectile.java`, `DownBossProjectile.java`
+
+4. **Sound effects and background music**
+   - Used the Java Sound API (`AudioInputStream` and `Clip`) to add background music and hit sound effects. 
+   - Implemented a separate thread to avoid blocking the main game loop. Background music loops continuously using `Clip.LOOP_CONTINUOUSLY`.
+   - Encapsulated music playback logic in a static method for easy integration with other classes.
+   - **Related Class:** `MusicPlayer.java`
+
+5. **Horizontal movement for the player**
+   - Enabled horizontal movement by extending the movement logic from `ActiveActor.java`. 
+   - Integrated keyboard detection in `LevelParent.java`, allowing the `UserPlane` to move freely on the game screen.
+   - **Related Classes:** `ActiveActor.java`, `LevelParent.java`, `UserPlane.java`
+
+6. **New levels**
+   - Introduced `LevelThree.java`, featuring a Boss battle.
+   - Increased enemy count in `LevelTwo.java` (up to 10 enemies at once) compared to `LevelOne` (maximum of 5 enemies). Players must eliminate 15 enemies to proceed to the next level.
+   - **Related Classes:** `LevelThree.java`, `LevelTwo.java`
+
 
 
 
 ---
+### 🚨 **Execution Results**
+**❌ The features have been implemented but are not functioning as expected.**
+---
+1. **Bug: The player's plane moves horizontally, but projectiles do not follow the X-axis movement**
+   - The X-coordinate update logic has already been implemented in the `UserProjectile` class.
+   - However, projectiles do not dynamically inherit the updated X-position of the player's plane, leading to incorrect firing positions.
+---
 
-**Feature Additions:**
+### 🚧 **Unimplemented Features**
 
-1. **Added a "Start Game" Button and Game Title via `StartController.java`**
-   - This class manages the startup logic and allows for the design of a pre-game interface.
-   - Utilized the `AnchorPane` container to organize the layout of the background, game title, and button.
-   - Includes UI design for the game title and button.
-   - Serves as the main logic before the game starts. When the user clicks the "Start Game" button, the game initializes and transitions to the first level.
-   - **Related Class**: `StartController.java`
+- **The following features were planned but could not be completed due to time constraints. These represent great opportunities for future improvement:**
 
-2. **Added Exception Handling and Static Constants in `Main.java`**
-   - Incorporated `try-catch` blocks to handle exceptions, making it easier to identify and debug issues during development.
-   - Updated the game window's `SCREEN_WIDTH` and `SCREEN_HEIGHT` to static constants, enabling easier adjustments to the game window size in future development.
-  
+1. **Add an Exit Button (Simple)**
+   - A button to allow players to exit the game conveniently.
 
-### December 12th ---- 1.1.0 Version
+2. **Implement a Healing Mechanism**
+   - Introduce a system to allow players to regain health during gameplay.
 
+3. **Use Canvas to Create a Dynamic Background**
+   - Leverage the flexibility of `Canvas` to implement visually appealing and dynamic scrolling backgrounds.
 
+---
 
-
-
-
-
-
-
-
-
-
-### 3. **Refactoring and Changes**
-
--**New class**:
--**edited class**:
+### **Future Work**
+These features provide excellent practice opportunities and will be further improved and completed in the future.
+---
 
 
+## New Java Classes
+
+1. **GameTools.java**
+   - **Functionality:** Provides utilities for managing game objects, including the method `removeDestroyedActors`, which removes destroyed game objects from the scene and memory.
+
+2. **MusicPlayer.java**
+   - **Functionality:** Handles background music and sound effects for the game. It supports looping background music and playing hit sound effects.
+
+3. **LevelThree.java**
+   - **Functionality:** Replaces the original `LevelTwo`. `LevelTwo` now serves as the level following `LevelOne`, enhancing the game's playability by adding a new, challenging Boss level.
+
+4. **UpBossProjectile.java**
+   - **Functionality:** Represents projectiles fired by the Boss in an upward diagonal direction.
+
+5. **DownBossProjectile.java**
+   - **Functionality:** Represents projectiles fired by the Boss in a downward diagonal direction.
+
+6. **EnhancedEnemyPlane.java**
+   - **Functionality:** Represents an enhanced enemy fighter plane with increased health and improved capabilities compared to regular enemies.
+
+7. **EnhancedEnemyProjectile.java**
+   - **Functionality:** Represents projectiles fired by enhanced enemy planes, with improved attributes or effects.
+
+8. **StartController.java**
+   - **Functionality:** The start page controller. Responsible for initializing and displaying the start page UI elements, handling player interactions, and launching the main game logic.
+
+9. **DifficultyEnum.java**
+   - **Functionality:** Defines the difficulty levels of the game as an enum. Provides a structured way to represent and manage game difficulty levels such as `SIMPLE` and `DIFFICULT`.
 
 
-### 4. **Known Bugs**:
-1.-Hitting the spacebar multiple times crashes the game.
-  --suspected Reason: memory leak (shells not being deleted in time.)
+## Modified Java Classes
 
-2.-The game jumps to the second level. boss didnt appears/
-  --suspected Reason: TimeLine update frequency is too high.
+1. **LevelParent.java**
+   - **Changes:** 
+     - Updated to support new levels and added mechanisms for transitioning between levels.
+     - Integrated logic for managing shields and enhanced enemy behaviors.
 
-3.-Gameover's icon display is too big, not in proportion to the screen.
-  --suspected Reason:///
+2. **LevelOne.java**
+   - **Changes:** 
+     - Adjusted enemy spawn logic to differentiate between difficulties (`SIMPLE` and `DIFFICULT`).
+     - Enhanced kill tracking to transition to `LevelTwo` after reaching the required kill count.
 
-4.-The game life value calculation is abnormal, even after dodging the cannonballs, the life 
-  value will be deducted.
-  --suspected Reason: the actual range of the cannonballs does not match the proportion of the 
-  cannonball pictures, or the judgement logic is wrong: the algorithm logic is wrong when the 
-  cannonballs fly out of the screen.
+3. **LevelTwo.java**
+   - **Changes:** 
+     - Introduced support for enhanced enemies.
+     - Increased enemy spawn rates and adjusted kill requirements for transitioning to `LevelThree`.
 
-5.-The image format in **shieldimage class** should not be jpg
+4. **LevelThree.java**
+   - **Changes:** 
+     - Added logic for managing the Boss fight, including shield activation and multiple projectile directions.
+     - Updated game-over and win conditions specific to the Boss battle.
 
-6.- it have **moveHorizontally** class, but the plane can not move left and right.
+5. **ShieldImage.java**
+   - **Changes:** 
+     - Improved rendering of the Boss shield and added dynamic display logic for shield activation and deactivation.
+
+6. **Controller.java**
+   - **Changes:** 
+     - Integrated difficulty selection functionality.
+     - Refactored level-loading logic to handle transitions seamlessly across levels.
+
+7. **Boss.java**
+   - **Changes:** 
+     - Adjusted movement patterns and added support for enhanced projectile mechanics.
+     - Improved shield behavior to make the Boss more challenging.
+     - Added new attack patterns with diagonal projectiles.
+
+8. **UserPlane.java**
+   - **Changes:** 
+     - Implemented horizontal movement logic using inherited methods from `ActiveActor`.
+     - Added dynamic health tracking to synchronize between levels.
+     - Improved projectile firing logic to account for X-axis movement.
+
+9. **LevelViewLevelTwo.java**
+   - **Changes:** 
+     - Enhanced UI elements to display the Boss shield dynamically.
+     - Adjusted layout and animations for the second-level view.
+
+10. **FighterPlane.java**
+    - **Changes:** 
+      - Refactored health management and damage logic to accommodate enhanced enemies.
+      - Generalized firing mechanics to support subclasses like `EnhancedEnemyPlane`.
+
+---
+
+
 
 
 
