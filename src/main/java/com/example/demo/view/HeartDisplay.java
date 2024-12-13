@@ -49,20 +49,20 @@ public class HeartDisplay {
 	}
 
 	/**
-	 * Changed to bloodstain form White rectangle at bottom, red rectangle at top
+	 * 改为血条形式 白底矩形在下，红色矩形在上
 	 */
 	private void initializeHearts() {
 		Rectangle rectangle = new Rectangle(0,0,BLOOD_WIDTH,BLOOD_HEIGHT);
 		rectangle.setFill(Color.WHITE);
 		container.getChildren().add(rectangle);
 
-		blood = new Rectangle(0,0,BLOOD_WIDTH,BLOOD_HEIGHT);
+		blood = new Rectangle(0,0,this.numberOfHeartsToDisplay*PER_BLOOD_WIDTH,BLOOD_HEIGHT);
 		blood.setFill(Color.RED);
 		container.getChildren().add(blood);
 	}
 
 	/**
-	 * Reducing the width of the red rectangle represents a reduction in blood volume.
+	 * 减红色矩形的宽度代表血量减少
 	 */
 	public void removeHeart() {
 		blood.setWidth(blood.getWidth()-PER_BLOOD_WIDTH);
@@ -73,7 +73,7 @@ public class HeartDisplay {
 	}
 
 	/**
-	 * Gain blood volume
+	 * 获取血量
 	 */
 	public int getBlood(){
 		return (int) (blood.getWidth()/PER_BLOOD_WIDTH);

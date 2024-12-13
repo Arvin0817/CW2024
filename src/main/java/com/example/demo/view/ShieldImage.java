@@ -10,10 +10,10 @@ public class ShieldImage extends ImageView {
 	private static final Image SHIELD_IMAGE = new Image(ShieldImage.class.getResource(IMAGE_PATH).toExternalForm()); // 静态加载图片
 
 	public ShieldImage(double xPosition, double yPosition) {
-		this.setLayoutX(xPosition); // x position
-		this.setLayoutY(yPosition); // y position
-		this.setImage(SHIELD_IMAGE);
-		this.setVisible(false); // Initial state is invisible
+		this.setLayoutX(xPosition); // 设置 X 坐标
+		this.setLayoutY(yPosition); // 设置 Y 坐标
+		this.setImage(SHIELD_IMAGE); // 设置护盾图片
+		this.setVisible(false); // 初始状态为不可见
 		this.setFitHeight(SHIELD_SIZE); // 设置图片高度
 		this.setFitWidth(SHIELD_SIZE); // 设置图片宽度
 	}
